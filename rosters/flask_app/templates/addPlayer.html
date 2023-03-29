@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StatKeepUp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bg-white text-white">
+    <header>
+        <nav class="bg-danger border-dark">
+            <div class="container">
+                <div class="flex-container">
+                    <div class="h4 pb-2 mb-4 border-bottom border-dark">
+                        <h1 class="majority-width">The Official Home of {{user.team_name}} Basketball</h1>
+                    </div>
+                    <div class="">
+                        <h2>Men's Basketball</h2>
+                        <a class="text-light" href="/dashboard" role="button">Back to Roster</a> |
+                        <a class="text-light" href="/logout" role="button">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="messages">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for m in messages %}
+                <h5>{{m}}</h5>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<main>
+    <form action="/createPlayer" method="POST" class="p-4 bg-light text-dark text-center">
+        <h1>Add a New Player to Your Program</h1>
+        <h2>Personal Info</h2>
+        <div class="row">
+            <div class="col">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" name="first_name" id="">
+            </div>
+            <div class="col">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" name="last_name" id="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="height">Height(ft):</label>
+                <input type="number" class="form-control" name="height" id="">
+            </div>
+            <div class="col">
+                <label for="weight">Weight(lbs):</label>
+                <input type="number" class="form-control" name="weight" id="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="grade">Class:</label>
+                <input type="text" class="form-control" name="grade" id="">
+            </div>
+            <div class="col">
+                <label for="bio">Position:</label>
+                <input type="text" class="form-control" name="bio" id="">
+            </div>
+        </div>
+        <h2>Stats</h2>
+        <div class="row">
+            <div class="col">
+                <label for="points_game">Points/game:</label>
+                <input type="number" class="form-control" name="points_game" id="">
+            </div>
+            <div class="col">
+                <label for="rebounds_game">Rebounds/game:</label>
+                <input type="number" class="form-control" name="rebounds_game" id="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="assists_game">Assists/game:</label>
+                <input type="number" class="form-control" name="assists_game" id="">
+            </div>
+            <div class="col">
+                <label for="blocks_game">Blocks/game:</label>
+                <input type="number" class="form-control" name="blocks_game" id="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="steals_game">Steals/game:</label>
+                <input type="number" class="form-control" name="steals_game" id="">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-dark">Add Player</button>
+    </form>
+</main>
+</body>
+</html>

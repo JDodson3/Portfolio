@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StatKeepUp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bg-white text-white">
+    <header>
+        <nav class="bg-danger border-dark">
+            <div class="container">
+                <div class="flex-container">
+                    <div class="h4 pb-2 mb-4 border-bottom border-dark">
+                        <h1 class="majority-width">The Official Home of {{user.team_name}} Basketball</h1>
+                    </div>
+                    <h1 class="majority-width">Welcome Coach {{user.last_name}}</h1>
+                    <div class="">
+                        <h2>Men's Basketball</h2>
+                        <a class="text-light" href="/addPlayer" role="button">Add Player to Roster</a> |
+                        <a class="text-light" href="/logout" role="button">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="messages">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for m in messages %}
+                <h5>{{m}}</h5>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<main>
+    <h1 class="p-2 text-dark text-center">2022-2023 {{user.team_name}} Roster</h1>
+    <div class="container">
+        <table class="table table-hover">
+            <thead class="table-group-divider border-top-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Class</th>
+                    <th>Profile</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                <tr>
+                    <td>{{player.first_name}} </td>
+                    <td>{{player.last_name}}</td>
+                    <td>{{player.grade}}</td>
+                    <td><a class="btn btn-dark" href="/players/{{player.id}}/view" role="button">View</a> | <a class="btn btn-dark" href="/players/{{player.id}}/delete" role="button">Remove Player</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
