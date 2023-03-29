@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous'>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj' crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='{{ url_for('static', filename='/css/style.css') }}'>
+    <title>Recipe Dashboard</title>
+</head>
+<body class="bg-secondary text-white">
+    <div class="row border border-dark bg-success">
+        <h1 class="col-8 text-white">The CookBook</h1>
+        <p class="col-1 text-white" style="height: 70%;">{{user.first_name}}</p>
+        <a href="/recipes/new" class="col-1 text-white" style="height: 70%;">Create</a>
+        <a href="/user/logout" class="col-1 text-white" style="height: 70%;">Logout</a>
+    </div>
+    <div class="container row justify-content-center mx-auto mt-2">
+        <div class="row">
+            <h4>These are some recipes</h4>
+
+            <table class="table table-dark table-striped table-hover table-sm fs-4 text-center">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Under</th>
+                        <th>Posted by</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipes %}
+                        <tr>
+                            <td>{{recipe.name}}</td>
+                            <td>
+                                {% if recipe.under_30 == 1 %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </td>
+                            <td>{{recipe.creator.first_name}}</td>
+                            <td>
+                                <a href="/recipes/{{recipe.id}}" class="btn btn-success">View Instructions</a>
+                                {% if session['user_id'] == recipe.creator.id %}
+                                    <a href="/recipes/edit/{{recipe.id}}" class="btn btn-secondary">Edit</a>
+                                    <a href="/recipes/destroy/{{recipe.id}}" class="btn btn-danger">Delete</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
